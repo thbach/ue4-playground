@@ -1,0 +1,9 @@
+{
+	"files.exclude": {
+		"E:/200617 - ue4 playground/ToonTanks/.vscode": true,
+		"E:/200617 - ue4 playground/ToonTanks/Content": true,
+		"E:/200617 - ue4 playground/ToonTanks/DerivedDataCache": true,
+		"E:/200617 - ue4 playground/ToonTanks/Intermediate": true,
+		"E:/200617 - ue4 playground/ToonTanks/Saved": true
+	}
+}
