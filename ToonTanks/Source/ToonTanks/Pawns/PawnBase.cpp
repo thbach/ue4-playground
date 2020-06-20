@@ -5,6 +5,9 @@
 #include "Components/CapsuleComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "ToonTanks/Actors/ProjectileBase.h"
+#include "ToonTanks/Components/HealthComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Sound/SoundBase.h"
 
 // Sets default values
 APawnBase::APawnBase()
@@ -24,6 +27,13 @@ APawnBase::APawnBase()
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Projectile Spawn Point"));
 	ProjectileSpawnPoint->SetupAttachment(TurretMesh);
 
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Component"));
+
+}
+
+void APawnBase::PawnDestroyed()
+{
+	HandleDestruction();
 }
 
 void APawnBase::RotateTurret(FVector LookAtTarget)
@@ -36,7 +46,6 @@ void APawnBase::RotateTurret(FVector LookAtTarget)
 
 void APawnBase::Fire()
 {
-	UE_LOG(LogTemp, Warning, TEXT("FIRE"));
 	if (!ProjectileClass) return;
 	{
 		FVector SpawnLocation = ProjectileSpawnPoint->GetComponentLocation();
@@ -50,6 +59,14 @@ void APawnBase::Fire()
 
 void APawnBase::HandleDestruction()
 {
+	if (DeathParticle)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticle, GetActorLocation(), FRotator::ZeroRotator);
+	}
+	if (DeathSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
+	}
 	// universal function
 	// play death effects/ soujnd and camera
 

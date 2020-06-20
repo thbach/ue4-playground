@@ -29,14 +29,11 @@ void APawnTurret::Tick(float DeltaTime)
 
 void APawnTurret::CheckFireCondition()
 {
-    if (!PlayerPawn) return;
+    if (!PlayerPawn || !PlayerPawn->GetPlayerAlive()) return;
 
     if (ReturnDistanceToPlayer() > FireRange) return;
 
     Fire();
-
-    // if playuer == null || is dead do NOTFIRE
-    // if player player ius in range then FIRE
 }
 
 float APawnTurret::ReturnDistanceToPlayer()

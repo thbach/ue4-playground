@@ -79,7 +79,11 @@ void APawnTank::HandleDestruction()
 {
     Super::HandleDestruction();
 
-    // Hide player TODO-create new function
+    bAlive = false;
+
+    SetActorHiddenInGame(true);
+    SetActorTickEnabled(false);
+
 }
 
 
