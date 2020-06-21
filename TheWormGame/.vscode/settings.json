@@ -1,0 +1,9 @@
+{
+	"files.exclude": {
+		"E:/200617 - ue4 playground/TheWormGame/.vscode": true,
+		"E:/200617 - ue4 playground/TheWormGame/Content": true,
+		"E:/200617 - ue4 playground/TheWormGame/DerivedDataCache": true,
+		"E:/200617 - ue4 playground/TheWormGame/Intermediate": true,
+		"E:/200617 - ue4 playground/TheWormGame/Saved": true
+	}
+}
