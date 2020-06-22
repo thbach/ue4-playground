@@ -6,6 +6,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "TimerManager.h"
 #include "Components/SceneComponent.h"
+#include "WormGameModeBase.h"
 
 // Sets default values
 ASpermCharacterBase::ASpermCharacterBase()
@@ -20,8 +21,11 @@ void ASpermCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GameModeRef = Cast<AWormGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+
 	Health = MaxHealth;
 	XDrift = DefaultXDrift;
+	HealthDrainRate = DefaultHealthDrainRate;
 
 }
 
@@ -31,9 +35,8 @@ void ASpermCharacterBase::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	// Constant dift
-	DriftForward();
-	Wiggle();
-
+	DriftForward(DeltaTime);
+	DrainHealth(DeltaTime);
 }
 
 // Called to bind functionality to input
@@ -50,14 +53,15 @@ void ASpermCharacterBase::MoveForward(float AxisValue)
 	AddMovementInput(GetActorForwardVector() * AxisValue * XSpeed);
 }
 
-void ASpermCharacterBase::DriftForward()
+void ASpermCharacterBase::DriftForward(float DeltaTime)
 {
-	AddActorLocalOffset(GetActorForwardVector() * XDrift * GetWorld()->GetDeltaSeconds(), true);
+	AddActorLocalOffset(GetActorForwardVector() * XDrift * DeltaTime, true);
 }
 
-void ASpermCharacterBase::Wiggle()
+void ASpermCharacterBase::DrainHealth(float DeltaTime)
 {
-	// AddActorLocalRotation();
+	Health = FMath::Clamp(Health - HealthDrainRate * DeltaTime , 0.0f, MaxHealth);
+	if (Health <= 0) HandleDeath();
 }
 
 void ASpermCharacterBase::MoveRight(float AxisValue)
@@ -69,12 +73,10 @@ void ASpermCharacterBase::HandleHealthHit(float Damage)
 {
 	if (Damage == 0 || Health == 0) return;
 	Health = FMath::Clamp(Health - Damage, 0.0f, MaxHealth);
-	UE_LOG(LogTemp, Warning, TEXT("my Health %f"), Health);
 	if (Health <= 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Im DEAD"), );
+		HandleDeath();
 	}
-
 }
 
 void ASpermCharacterBase::HandleSpeedHit(float SpeedModifier)
@@ -91,6 +93,11 @@ void ASpermCharacterBase::HandleSpeedHit(float SpeedModifier)
 
 void ASpermCharacterBase::HandleDeath()
 {
-	// TODO
+	UE_LOG(LogTemp, Warning, TEXT("Im DEAD"), );
+	XDrift = 0;
+
+	if (!GameModeRef) return;
+
+	GameModeRef->ActorDied(this);
 }
 
