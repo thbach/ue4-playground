@@ -6,36 +6,45 @@
 #include "GameFramework/Character.h"
 #include "SpermCharacterBase.generated.h"
 
+class USceneComponent;
+
 UCLASS()
 class THEWORMGAME_API ASpermCharacterBase : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
+
 	ASpermCharacterBase();
+
+	virtual void Tick(float DeltaTime) override;
+
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	void HandleHealthHit(float Damage);
+	void HandleSpeedHit(float SpeedModifier);
+
+	UFUNCTION(BlueprintPure)
+	bool IsDead() const { return Health <= 0; }
+
+	UFUNCTION(BlueprintPure)
+	float GetHealthPercent() const { return Health / MaxHealth; }
+
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-
-	void HandleHealthHit(float Damage);
-	void HandleSpeedHit(float SpeedModifier);
 
 private:
+	// Components
+
+
 	// Config
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
-	float DefaultXDrift = 0.1;
+	float DefaultXDrift = 10;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
-	float XSpeed = 0.5;
+	float XSpeed = 0.4;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health", meta = (AllowPrivateAccess = "true"))
 	float MaxHealth = 100;
 
@@ -44,7 +53,8 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	float Health;
 
-	void DriftForward(float AxisValue);
+	void DriftForward();
+	void Wiggle();
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
 

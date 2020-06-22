@@ -34,9 +34,10 @@ private:
 
 	// Variables
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Speed", meta = (AllowPrivateAccess = "true"))
-	float SpeedModifier = 10;
+	float SpeedModifier = 2;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Class", meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<ASpermCharacterBase> SpermClass;
+	TSubclassOf<ASpermCharacterBase> SpermAIClass;
+
 
 	UFUNCTION()
 	void ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);

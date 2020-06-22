@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/SceneComponent.h"
 #include "Components/BoxComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ASpeedPatchBase::ASpeedPatchBase()
@@ -31,23 +32,21 @@ void ASpeedPatchBase::BeginPlay()
 
 void ASpeedPatchBase::ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-	if (!SpermClass) return;
+	if (!SpermAIClass) return;
 
-	if (OtherActor->GetClass() == SpermClass)
+	if (OtherActor->GetClass() == SpermAIClass || OtherActor == UGameplayStatics::GetPlayerPawn(GetWorld(), 0))
 	{
 		Cast<ASpermCharacterBase>(OtherActor)->HandleSpeedHit(SpeedModifier);
-		// Destroy();
 	}
 }
 
 void ASpeedPatchBase::ActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor)
 {
-	if (!SpermClass) return;
+	if (!SpermAIClass) return;
 
-	if (OtherActor->GetClass() == SpermClass)
+	if (OtherActor->GetClass() == SpermAIClass || OtherActor == UGameplayStatics::GetPlayerPawn(GetWorld(), 0))
 	{
-		Cast<ASpermCharacterBase>(OtherActor)->HandleSpeedHit(0.0f);
-		// Destroy();
+		Cast<ASpermCharacterBase>(OtherActor)->HandleSpeedHit(1.0f);
 	}
 }
 

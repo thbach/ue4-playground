@@ -5,6 +5,7 @@
 #include "Math/UnrealMathUtility.h"
 #include "Kismet/GameplayStatics.h"
 #include "TimerManager.h"
+#include "Components/SceneComponent.h"
 
 // Sets default values
 ASpermCharacterBase::ASpermCharacterBase()
@@ -30,7 +31,8 @@ void ASpermCharacterBase::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	// Constant dift
-	DriftForward(XDrift);
+	DriftForward();
+	Wiggle();
 
 }
 
@@ -45,18 +47,22 @@ void ASpermCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInput
 
 void ASpermCharacterBase::MoveForward(float AxisValue)
 {
-	AxisValue += XDrift;
 	AddMovementInput(GetActorForwardVector() * AxisValue * XSpeed);
+}
+
+void ASpermCharacterBase::DriftForward()
+{
+	AddActorLocalOffset(GetActorForwardVector() * XDrift * GetWorld()->GetDeltaSeconds(), true);
+}
+
+void ASpermCharacterBase::Wiggle()
+{
+	// AddActorLocalRotation();
 }
 
 void ASpermCharacterBase::MoveRight(float AxisValue)
 {
 	AddMovementInput(GetActorRightVector() * AxisValue);
-}
-
-void ASpermCharacterBase::DriftForward(float AxisValue)
-{
-	AddMovementInput(GetActorForwardVector() * AxisValue);
 }
 
 void ASpermCharacterBase::HandleHealthHit(float Damage)
@@ -73,9 +79,9 @@ void ASpermCharacterBase::HandleHealthHit(float Damage)
 
 void ASpermCharacterBase::HandleSpeedHit(float SpeedModifier)
 {
-	if (SpeedModifier)
+	if (SpeedModifier != 1.0f)
 	{
-		XDrift += SpeedModifier;
+		XDrift *= SpeedModifier;
 	}
 	else
 	{
