@@ -18,6 +18,7 @@ void AWormGameModeBase::ActorDied(AActor* DeadActor)
 {
     if (DeadActor == PlayerSperm)
     {
+        PlayerSperm->DisableInput(UGameplayStatics::GetPlayerController(GetWorld(), 0));
         HandleGameOver(false);
         bGameHasEnded = true;
     }
