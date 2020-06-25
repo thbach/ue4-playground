@@ -28,6 +28,9 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool IsDead() const { return Health <= 0; }
 
+	UFUNCTION(BlueprintCallable)
+	void ResetStatus();
+
 	UFUNCTION(BlueprintPure)
 	float GetHealthPercent() const { return Health / MaxHealth; }
 

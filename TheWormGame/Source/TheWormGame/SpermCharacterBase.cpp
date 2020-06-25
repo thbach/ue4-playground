@@ -91,9 +91,15 @@ void ASpermCharacterBase::HandleSpeedHit(float SpeedModifier)
 	}
 }
 
+void ASpermCharacterBase::ResetStatus()
+{
+	Health = MaxHealth;
+	XDrift = DefaultXDrift;
+	HealthDrainRate = DefaultHealthDrainRate;
+}
+
 void ASpermCharacterBase::HandleDeath()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Im DEAD"), );
 	XDrift = 0;
 
 	if (!GameModeRef) return;

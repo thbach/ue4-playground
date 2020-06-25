@@ -22,9 +22,10 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	// Config
+	// Components
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* PickupMesh;
+
 
 	// Variables
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage", meta = (AllowPrivateAccess = "true"))

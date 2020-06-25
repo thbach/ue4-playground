@@ -2,7 +2,6 @@
 
 
 #include "PickupBase.h"
-#include "Components/StaticMeshComponent.h"
 #include "SpermCharacterBase.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -31,7 +30,10 @@ void APickupBase::ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 	if (OtherActor->GetClass() == SpermAIClass || OtherActor == UGameplayStatics::GetPlayerPawn(GetWorld(), 0))
 	{
 		Cast<ASpermCharacterBase>(OtherActor)->HandleHealthHit(Damage);
-		Destroy();
+		// Destroy();
+		SetActorTickEnabled(false);
+		SetActorHiddenInGame(true);
+		SetActorEnableCollision(false);
 	}
 }
 
