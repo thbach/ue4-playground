@@ -19,6 +19,8 @@ public:
 	// Sets default values for this actor's properties
 	ASpawnPool();
 
+	void ShouldRespawn(bool bShouldRespawn) { bRespawn = bShouldRespawn; }
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

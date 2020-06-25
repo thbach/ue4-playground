@@ -6,6 +6,7 @@
 #include "Containers/Map.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "TimerManager.h"
+#include "PickupBase.h"
 
 // Sets default values
 ASpawnPool::ASpawnPool()
@@ -57,6 +58,7 @@ void ASpawnPool::SpawnActor(TSubclassOf<AActor> ActorClass)
 
 void ASpawnPool::RespawnActors()
 {
+	if (!bRespawn) return;
 	// Add Dead Actors, then chose one randomly, then reset them
 	TArray<AActor* > DeadActors;
 	for (AActor* Actor : SpawnedActors)
@@ -71,8 +73,10 @@ void ASpawnPool::RespawnActors()
 	{
 		int32 ActorToSpawn = FMath::RandRange(0, DeadActors.Num()-1);
 		AActor* DeadActor = DeadActors[ActorToSpawn];
-		DeadActor->SetActorLocation(GetSpawnLocation());
-		DeadActor->SetActorRotation(GetSpawnRotation());
+		FHitResult* HitResult = nullptr;
+		DeadActor->Reset();
+		DeadActor->SetActorLocation(GetSpawnLocation(), true, HitResult, ETeleportType::ResetPhysics);
+		DeadActor->SetActorRotation(GetSpawnRotation(), ETeleportType::ResetPhysics);
 		DeadActor->SetActorHiddenInGame(false);
 		DeadActor->SetActorTickEnabled(true);
 		DeadActor->SetActorEnableCollision(true);

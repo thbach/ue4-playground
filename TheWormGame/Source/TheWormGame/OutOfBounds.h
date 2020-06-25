@@ -4,20 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "PickupBase.generated.h"
+#include "OutOfBounds.generated.h"
 
+class UBoxComponent;
 class ASpermCharacterBase;
-class UParticleSystem;
+class APickupBase;
 
 UCLASS()
-class THEWORMGAME_API APickupBase : public AActor
+class THEWORMGAME_API AOutOfBounds : public AActor
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this actor's properties
-	APickupBase();
-
+	AOutOfBounds();
 
 protected:
 	// Called when the game starts or when spawned
@@ -26,17 +26,13 @@ protected:
 private:
 	// Components
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* PickupMesh;
+	UBoxComponent* BoxComponent;
 
-	// Effects
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Effects", meta = (AllowPrivateAccess = "true"))
-	UParticleSystem* HitParticle;
-
-	// Variables
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage", meta = (AllowPrivateAccess = "true"))
-	float Damage = 10;
+	// Varriables
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Class", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<ASpermCharacterBase> SpermAIClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Class", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<APickupBase> PickupClass;
 
 	UFUNCTION()
 	void ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);

@@ -30,10 +30,14 @@ void APickupBase::ActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor)
 	if (OtherActor->GetClass() == SpermAIClass || OtherActor == UGameplayStatics::GetPlayerPawn(GetWorld(), 0))
 	{
 		Cast<ASpermCharacterBase>(OtherActor)->HandleHealthHit(Damage);
-		// Destroy();
+		if (HitParticle)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(this, HitParticle, GetActorLocation(), FRotator::ZeroRotator);
+		}
 		SetActorTickEnabled(false);
 		SetActorHiddenInGame(true);
 		SetActorEnableCollision(false);
+
 	}
 }
 
