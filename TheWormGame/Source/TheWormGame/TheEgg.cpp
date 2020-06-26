@@ -29,6 +29,8 @@ void ATheEgg::BeginPlay()
 {
 	Super::BeginPlay();
 	GameModeRef = Cast<AWormGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+	// Hard Code
+	if (GameModeRef) GameModeRef->SetEggLocation(SphereComponent->GetComponentLocation());
 	OnActorBeginOverlap.AddDynamic(this, &ATheEgg::ActorBeginOverlap);
 }
 

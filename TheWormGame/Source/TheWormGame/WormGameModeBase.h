@@ -23,6 +23,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void GameOver(bool PlayerWon, bool bIsTimeout);
 
+	FVector GetEggLocation() { return EggLocation; }
+	void SetEggLocation(FVector Location) { EggLocation = Location; }
+
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player", meta = (AllowPrivateAccess = "true"))
 	ASpermCharacterBase* PlayerSperm;
@@ -30,6 +33,8 @@ private:
 	void HandleGameOver(bool PlayerWon, bool bIsTimeout=false);
 
 	bool bGameHasEnded = false;
+
+	FVector EggLocation;
 
 
 };
