@@ -1,0 +1,128 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "pacman (Debug)",
+			"request": "launch",
+			"preLaunchTask": "pacman Win64 Debug Build",
+			"program": "E:\\200617 - ue4 playground\\pacman\\Binaries\\Win64\\UE4-Win64-Debug.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\UE_4.25",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\UE_4.25\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "pacman (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "pacman Win64 DebugGame Build",
+			"program": "E:\\200617 - ue4 playground\\pacman\\Binaries\\Win64\\UE4-Win64-DebugGame.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\UE_4.25",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\UE_4.25\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "pacman (Development)",
+			"request": "launch",
+			"preLaunchTask": "pacman Win64 Development Build",
+			"program": "E:\\200617 - ue4 playground\\pacman\\Binaries\\Win64\\UE4.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\UE_4.25",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\UE_4.25\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "pacman (Shipping)",
+			"request": "launch",
+			"preLaunchTask": "pacman Win64 Shipping Build",
+			"program": "E:\\200617 - ue4 playground\\pacman\\Binaries\\Win64\\UE4-Win64-Shipping.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\UE_4.25",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\UE_4.25\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "pacman (Test)",
+			"request": "launch",
+			"preLaunchTask": "pacman Win64 Test Build",
+			"program": "E:\\200617 - ue4 playground\\pacman\\Binaries\\Win64\\UE4-Win64-Test.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\UE_4.25",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\UE_4.25\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "pacmanEditor (Debug)",
+			"request": "launch",
+			"preLaunchTask": "pacmanEditor Win64 Debug Build",
+			"program": "C:\\Program Files\\UE_4.25\\Engine\\Binaries\\Win64\\UE4Editor-Win64-Debug.exe",
+			"args": [
+				"E:\\200617 - ue4 playground\\pacman\\pacman.uproject"
+			],
+			"cwd": "C:\\Program Files\\UE_4.25",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\UE_4.25\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "pacmanEditor (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "pacmanEditor Win64 DebugGame Build",
+			"program": "C:\\Program Files\\UE_4.25\\Engine\\Binaries\\Win64\\UE4Editor-Win64-DebugGame.exe",
+			"args": [
+				"E:\\200617 - ue4 playground\\pacman\\pacman.uproject"
+			],
+			"cwd": "C:\\Program Files\\UE_4.25",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\UE_4.25\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "pacmanEditor (Development)",
+			"request": "launch",
+			"preLaunchTask": "pacmanEditor Win64 Development Build",
+			"program": "C:\\Program Files\\UE_4.25\\Engine\\Binaries\\Win64\\UE4Editor.exe",
+			"args": [
+				"E:\\200617 - ue4 playground\\pacman\\pacman.uproject"
+			],
+			"cwd": "C:\\Program Files\\UE_4.25",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\UE_4.25\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Generate Project Files",
+			"type": "clr",
+			"request": "launch",
+			"program": "C:\\Program Files\\UE_4.25\\Engine\\Binaries\\DotNET\\UnrealBuildTool.exe",
+			"console": "externalTerminal",
+			"args": [
+				"-projectfiles",
+				"-vscode",
+				"-project=\"E:\\200617 - ue4 playground\\pacman\\pacman.uproject\"",
+				"-game",
+				"-engine"
+			],
+			"internalConsoleOptions": "openOnSessionStart",
+			"cwd": "C:\\Program Files\\UE_4.25"
+		}
+	]
+}

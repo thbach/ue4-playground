@@ -1,0 +1,7 @@
+{
+	"files.exclude": {
+		"E:/200617 - ue4 playground/pacman/.vscode": true,
+		"E:/200617 - ue4 playground/pacman/Content": true,
+		"E:/200617 - ue4 playground/pacman/Intermediate": true
+	}
+}
